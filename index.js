@@ -7,7 +7,7 @@ let opentok = require('opentok');
 let app = express();
 let sessionsDb = new nedb({ filename: 'sessions.db', autoload: true });
 nunjucks.configure('views', { autoescape: true, express: app });
-let OT = new opentok(process.env.API_KEY, process.env.API_SECRET);
+let OT = new opentok(process.env.API_KEY, process.env.API_SECRET, { timeout: 60000});
 
 app.get('/:room', function(req, res) {
 	sessionsDb.findOne({ name: req.params.room }, function(error, room) {
